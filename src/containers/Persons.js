@@ -5,15 +5,15 @@ import AddPerson from '../components/AddPerson/AddPerson';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_PERSON, DELETE_PERSON } from '../store/actions-constant';
 
-const Persons = (props) => {
+const Persons = () => {
     const persons = useSelector(state => state.persons);
 
     const dispatch = useDispatch();
     const addPerson = useCallback((person) => {
-        dispatch({ type: ADD_PERSON, val: person })
+        dispatch({ type: ADD_PERSON, value: person })
     });
     const deletePerson = useCallback((personId) => {
-        dispatch({ type: DELETE_PERSON, val: personId })
+        dispatch({ type: DELETE_PERSON, value: personId })
     });
 
     const personAddedHandler = () => {
@@ -21,18 +21,13 @@ const Persons = (props) => {
             id: Math.random(), // not really unique but good enough here!
             name: 'Max',
             age: Math.floor(Math.random() * 40)
-        }
+        };
+
         addPerson(newPerson);
-        // this.setState((prevState) => {
-        //     return { persons: prevState.persons.concat(newPerson) }
-        // });
     }
 
     const personDeletedHandler = (personId) => {
         deletePerson(personId);
-        // this.setState((prevState) => {
-        //     return { persons: prevState.persons.filter(person => person.id !== personId) }
-        // });
     }
 
     return (
